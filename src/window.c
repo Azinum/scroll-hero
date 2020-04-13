@@ -1,6 +1,7 @@
 // window.c
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "common.h"
 #include "window.h"
@@ -9,6 +10,7 @@ struct Window {
   SDL_Renderer* renderer;
   SDL_Window* window;
   SDL_Event event;
+  TTF_Font* font;
   unsigned char init;
 };
 
@@ -30,7 +32,7 @@ int window_init(const char* screen_title, int screen_width, int screen_height) {
   );
   if (!window.window) {
     log_out("%s\n", SDL_GetError());
-    return -1;
+    return ERR;
   }
   // SDL_RENDERER_ACCELERATED | SDL_RENDERER_SOFTWARE § SDL_RENDERER_PRESENTVSYNC
   window.renderer = SDL_CreateRenderer(window.window, -1,
@@ -38,18 +40,30 @@ int window_init(const char* screen_title, int screen_width, int screen_height) {
   );
   if (!window.renderer) {
     log_out("%s\n", SDL_GetError());
-    return -1;
+    return ERR;
   }
   if (SDL_SetRenderDrawBlendMode(window.renderer, SDL_BLENDMODE_BLEND) != 0) {
     log_out("%s\n", SDL_GetError());
-    return -1;
+    return ERR;
+  }
+  if (TTF_Init() != 0) {
+    log_out("TTF_Init: %s\n", TTF_GetError());
+    return ERR;
+  }
+  if (!(window.font = TTF_OpenFont("resources/fonts/font.ttf", 30))) {
+    log_out("TTF_OpenFont: %s\n", TTF_GetError());
+    return ERR;
   }
   window.init = 1;
-  return 0;
+  return NO_ERR;
 }
 
 void* window_renderer() {
   return window.renderer;
+}
+
+void* window_font() {
+  return window.font;
 }
 
 const unsigned char* window_keyboardstate() {
@@ -99,5 +113,7 @@ void window_render() {
 void window_free() {
   SDL_DestroyWindow(window.window);
   SDL_DestroyRenderer(window.renderer);
+  TTF_CloseFont(window.font);
+  TTF_Quit();
   SDL_Quit();
 }

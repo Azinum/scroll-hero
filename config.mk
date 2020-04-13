@@ -12,7 +12,9 @@ SRC_FILES=$(SRC_DIR)/*.c
 
 BUILD_DIR=build
 
-LIBS=-lSDL2
+RESOURCES_DIR=resources
+
+LIBS=-lSDL2 -lSDL2_ttf
 
 FLAGS=$(SRC_FILES) -I$(INCLUDE_DIR) -o $(BUILD_DIR)/$(PROG_NAME) -O2 -Wall
 

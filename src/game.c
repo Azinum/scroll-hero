@@ -16,6 +16,7 @@ int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
   if (window_init("Generic game | 800x600", 800, 600) != 0)
     return -1;
+
   clock_t time_now = 0;
   clock_t time_last = 0;
   double deltatime_max = 0.25f;
@@ -27,7 +28,7 @@ int game_execute(int argc, char** argv) {
     if (deltatime > deltatime_max)
       deltatime = deltatime_max;
 
-    render_fill_rect(20, 20, 50, 50, 250, 100, 120, 255);
+    render_text(10, 10, 1, "Hello, World! This is a long string of text.");
     window_render();
     window_clear();
   }
