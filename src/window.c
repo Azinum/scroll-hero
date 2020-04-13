@@ -48,6 +48,19 @@ int window_init(const char* screen_title, int screen_width, int screen_height) {
   return 0;
 }
 
+void* window_renderer() {
+  return window.renderer;
+}
+
+const unsigned char* window_keyboardstate() {
+  return SDL_GetKeyboardState(NULL);
+}
+
+void window_change_title(const char* new_title) {
+  assert(window.window != NULL);
+  SDL_SetWindowTitle(window.window, new_title);
+}
+
 int window_pollevent() {
   while (SDL_PollEvent(&window.event)) {
     switch (window.event.type) {
