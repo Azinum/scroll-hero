@@ -1,0 +1,90 @@
+// window.c
+
+#include "shared.h"
+#include "window.h"
+
+#include <SDL2/SDL.h>
+
+struct Window {
+  SDL_Renderer* renderer;
+  SDL_Window* window;
+  SDL_Event event;
+  unsigned char init;
+};
+
+static struct Window window;
+
+int window_init(const char* screen_title, int screen_width, int screen_height) {
+  log_out("Window init (w: %i, h: %i)\n", screen_width, screen_height);
+  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+    log_out("%s\n", SDL_GetError());
+    return -1;
+  }
+  window.window = SDL_CreateWindow(
+    screen_title,
+    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,
+    screen_width,
+    screen_height,
+    SDL_WINDOW_SHOWN
+  );
+  if (!window.window) {
+    log_out("%s\n", SDL_GetError());
+    return -1;
+  }
+  // SDL_RENDERER_ACCELERATED | SDL_RENDERER_SOFTWARE § SDL_RENDERER_PRESENTVSYNC
+  window.renderer = SDL_CreateRenderer(window.window, -1,
+    SDL_RENDERER_PRESENTVSYNC
+  );
+  if (!window.renderer) {
+    log_out("%s\n", SDL_GetError());
+    return -1;
+  }
+  if (SDL_SetRenderDrawBlendMode(window.renderer, SDL_BLENDMODE_BLEND) != 0) {
+    log_out("%s\n", SDL_GetError());
+    return -1;
+  }
+  window.init = 1;
+  return 0;
+}
+
+int window_pollevent() {
+  while (SDL_PollEvent(&window.event)) {
+    switch (window.event.type) {
+      case SDL_QUIT:
+        return -1;
+
+      case SDL_KEYDOWN: {
+        switch (window.event.key.keysym.sym) {
+          case SDLK_ESCAPE:
+            return -1;
+
+          default:
+            break;
+        }
+        break;
+      }
+
+      default:
+        break;
+    }
+  }
+  return 0;
+}
+
+void window_clear() {
+  assert(window.renderer != NULL);
+  SDL_SetRenderDrawColor(window.renderer, 0, 0, 0, 255);
+  SDL_RenderClear(window.renderer);
+}
+
+void window_render() {
+  assert(window.renderer != NULL);
+  SDL_RenderPresent(window.renderer);
+}
+
+void window_free() {
+  SDL_DestroyWindow(window.window);
+  SDL_DestroyRenderer(window.renderer);
+  SDL_Quit();
+}
