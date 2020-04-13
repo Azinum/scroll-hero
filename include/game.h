@@ -5,4 +5,6 @@
 
 int game_execute(int argc, char** argv);
 
+double game_deltatime();
+
 #endif

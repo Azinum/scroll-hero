@@ -1,7 +1,7 @@
-// shared.h
+// common.h
 
-#ifndef _SHARED_H
-#define _SHARED_H
+#ifndef _COMMON_H
+#define _COMMON_H
 
 #include <assert.h>
 #include <stdio.h>

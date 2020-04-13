@@ -1,6 +1,8 @@
 // game.c
 
-#include "shared.h"
+#include <time.h>
+
+#include "common.h"
 #include "render.h"
 #include "window.h"
 
@@ -8,22 +10,31 @@
 
 #define TITLE_LENGTH_MAX 32
 
+static double deltatime = 0;
+
 int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
   if (window_init("Generic game | 800x600", 800, 600) != 0)
     return -1;
-  char title[TITLE_LENGTH_MAX] = {0};
-  int i = 0;
+  clock_t time_now = 0;
+  clock_t time_last = 0;
+  double deltatime_max = 0.25f;
+
   while (!window_pollevent()) {
-    i++;
-    if (!(i % 10)) {
-      snprintf(title, TITLE_LENGTH_MAX, "Generic game (%i)", i);
-      window_change_title(title);
-    }
-    render_rect(20, 20, 50, 50, 250, 100, 120, 255);
+    time_last = time_now;
+    time_now = clock();
+    deltatime = ((double)(time_now - time_last)) / CLOCKS_PER_SEC;
+    if (deltatime > deltatime_max)
+      deltatime = deltatime_max;
+
+    render_fill_rect(20, 20, 50, 50, 250, 100, 120, 255);
     window_render();
     window_clear();
   }
   window_free();
   return 0;
+}
+
+double game_deltatime() {
+  return deltatime;
 }

@@ -1,9 +1,9 @@
 // window.c
 
-#include "shared.h"
-#include "window.h"
-
 #include <SDL2/SDL.h>
+
+#include "common.h"
+#include "window.h"
 
 struct Window {
   SDL_Renderer* renderer;

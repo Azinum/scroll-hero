@@ -1,9 +1,9 @@
 // log.c
 
-#include "log.h"
-
 #include <stdarg.h>
 #include <stdio.h>
+
+#include "log.h"
 
 void log_out(const char* format, ...) {
   va_list args;
