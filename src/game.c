@@ -15,6 +15,7 @@
 #define TITLE_LENGTH_MAX 32
 
 static double deltatime = 1;
+static double totaltime = 0;
 
 int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
@@ -24,9 +25,8 @@ int game_execute(int argc, char** argv) {
   camera_init();
   player_init();
 
-  entity_add(50, 40);
-  entity_add(70, 70);
-  entity_add(120, 65);
+  entity_add(50, 140);
+  entity_add(150, 230);
 
   double time_now = 0;
   double time_last = 0;
@@ -35,9 +35,10 @@ int game_execute(int argc, char** argv) {
   while (!window_pollevent()) {
     time_last = time_now;
     time_now = window_time();
-    deltatime = ((double)(time_now - time_last)) / CLOCKS_PER_SEC;
+    deltatime = ((double)(time_now - time_last)) / (CLOCKS_PER_SEC * 1000);
     if (deltatime > deltatime_max)
       deltatime = deltatime_max;
+    totaltime += deltatime;
 
     camera_update();
     entities_update();
@@ -58,4 +59,8 @@ int game_execute(int argc, char** argv) {
 
 double game_deltatime() {
   return deltatime;
+}
+
+double game_totaltime() {
+  return totaltime;
 }

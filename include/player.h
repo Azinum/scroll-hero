@@ -3,6 +3,8 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
+#include "entity.h"
+
 struct Entity player;
 
 void player_init();
