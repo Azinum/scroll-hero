@@ -4,6 +4,8 @@
 #define _ENTITY_H
 
 struct Entity {
+  struct Entity* prev;
+  struct Entity* next;
   short id;
   int x;
   int y;
@@ -11,8 +13,17 @@ struct Entity {
   int h;
 };
 
-void entity_default(struct Entity* entity);
+extern struct Entity* entities;
+extern struct Entity* inactive_entities;
 
-void entity_render(struct Entity* entity);
+struct Entity* entity_add(int x, int y);
+
+struct Entity* entity_remove(struct Entity* entity);
+
+void entities_update();
+
+void entities_render();
+
+void entities_clear();
 
 #endif

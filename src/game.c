@@ -17,14 +17,15 @@ int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
   if (window_init("Generic game | 800x600", 800, 600) != 0)
     return -1;
-  clock_t time_now = 0;
-  clock_t time_last = 0;
-  double deltatime_max = 0.25f;
+  double time_now = 0;
+  double time_last = 0;
+  const double deltatime_max = 0.25f;
 
-  struct Entity player;
-  entity_default(&player);
-  player.x = 40; player.y = 40; player.w = 15; player.h = 15;
   const unsigned char* state = window_keyboardstate();
+  (void)state;
+  entity_add(50, 40);
+  entity_add(70, 70);
+  entity_add(120, 65);
 
   while (!window_pollevent()) {
     time_last = time_now;
@@ -33,21 +34,13 @@ int game_execute(int argc, char** argv) {
     if (deltatime > deltatime_max)
       deltatime = deltatime_max;
 
+    entities_update();
+    entities_render();
     render_text(10, 10, 0.5f, "HP: 5/5");
-    entity_render(&player);
-
-    if (state[26])
-      player.y -= 3;
-    if (state[22])
-      player.y += 3;
-    if (state[4])
-      player.x -= 3;
-    if (state[7])
-      player.x += 3;
-
     window_render();
     window_clear();
   }
+  entities_clear(entities);
   window_free();
   return 0;
 }
