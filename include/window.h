@@ -13,6 +13,8 @@ const unsigned char* window_keyboardstate();
 
 int window_pollevent();
 
+clock_t window_time();
+
 void window_change_title(const char* new_title);
 
 void window_clear();

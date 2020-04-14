@@ -10,7 +10,7 @@
 
 #define TITLE_LENGTH_MAX 32
 
-static double deltatime = 0;
+static double deltatime = 1;
 
 int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
@@ -20,10 +20,9 @@ int game_execute(int argc, char** argv) {
   clock_t time_now = 0;
   clock_t time_last = 0;
   double deltatime_max = 0.25f;
-
   while (!window_pollevent()) {
     time_last = time_now;
-    time_now = clock();
+    time_now = window_time();
     deltatime = ((double)(time_now - time_last)) / CLOCKS_PER_SEC;
     if (deltatime > deltatime_max)
       deltatime = deltatime_max;

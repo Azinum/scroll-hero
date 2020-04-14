@@ -99,6 +99,10 @@ int window_pollevent() {
   return 0;
 }
 
+clock_t window_time() {
+  return SDL_GetPerformanceCounter();
+}
+
 void window_clear() {
   assert(window.renderer != NULL);
   SDL_SetRenderDrawColor(window.renderer, 0, 0, 0, 255);
