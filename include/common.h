@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include "log.h"
+#include "list.h"
 
 #define NO_ERR 0
 #define ERR -1
