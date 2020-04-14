@@ -5,6 +5,8 @@
 #include "common.h"
 #include "camera.h"
 #include "entity.h"
+#include "player.h"
+#include "hud.h"
 #include "render.h"
 #include "window.h"
 
@@ -20,6 +22,8 @@ int game_execute(int argc, char** argv) {
     return -1;
 
   camera_init();
+  player_init();
+
   entity_add(50, 40);
   entity_add(70, 70);
   entity_add(120, 65);
@@ -34,10 +38,16 @@ int game_execute(int argc, char** argv) {
     deltatime = ((double)(time_now - time_last)) / CLOCKS_PER_SEC;
     if (deltatime > deltatime_max)
       deltatime = deltatime_max;
+
     camera_update();
     entities_update();
+    player_update();
+
     entities_render();
-    render_text(10, 10, 0.5f, "HP: 5/5");
+    player_render();
+
+    hud_render(); // Render HUD on top of everything
+
     window_render();
     window_clear();
   }
