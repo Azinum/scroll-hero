@@ -1,6 +1,7 @@
 // entity.c
 
 #include "common.h"
+#include "camera.h"
 #include "list.h"
 #include "render.h"
 #include "entity.h"
@@ -46,7 +47,6 @@ void entities_update() {
   struct Entity* next;
   while (e) {
     next = e->next;
-    // Update the entity here
     e = next;
   }
 }
@@ -54,7 +54,7 @@ void entities_update() {
 void entities_render() {
   const struct Entity* e = entities;
   while (e) {
-    render_fill_rect(e->x, e->y, e->w, e->h, 255, 100, 100, 255);
+    render_fill_rect(e->x - camera.x, e->y - camera.y, e->w, e->h, 255, 100, 100, 255);
     e = e->next;
   }
 }

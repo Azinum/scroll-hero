@@ -99,7 +99,7 @@ int window_pollevent() {
   return 0;
 }
 
-clock_t window_time() {
+double window_time() {
   return SDL_GetPerformanceCounter();
 }
 
