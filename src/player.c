@@ -9,10 +9,9 @@
 
 #include "player.h"
 
-static float player_speed = 50.0f;
-static float player_maxspeed = 300.0f;
-static float x_vel = 0;
-static float y_vel = 0;
+static short player_speed = 4;
+static short x_speed = 0;
+static short y_speed = 0;
 
 void player_init() {
   player.x = 80;
@@ -25,27 +24,29 @@ void player_update() {
   const unsigned char* state = window_keyboardstate();
  
   if (state[26])
-    y_vel -= player_speed;
-  if (state[22])
-    y_vel += player_speed;
+    y_speed = -player_speed;
+  else if (state[22])
+    y_speed = player_speed;
+  else {
+    if (y_speed > 0)
+      y_speed--;
+    else if (y_speed < 0)
+      y_speed++;
+  }
 
   if (state[4])
-    x_vel -= player_speed;
-  if (state[7])
-    x_vel += player_speed;
+    x_speed = -player_speed;
+  else if (state[7])
+    x_speed = player_speed;
+  else {
+    if (x_speed > 0)
+      x_speed--;
+    else if (x_speed < 0)
+      x_speed++;
+  }
 
-  if (y_vel > 0 && y_vel > player_maxspeed)
-    y_vel = player_maxspeed;
-  else if (y_vel < 0 && y_vel < -player_maxspeed)
-    y_vel = -player_maxspeed;
-
-  if (x_vel > 0 && x_vel > player_maxspeed)
-    x_vel = player_maxspeed;
-  else if (x_vel < 0 && x_vel < -player_maxspeed)
-    x_vel = -player_maxspeed;
-
-  player.x += x_vel * game_deltatime();
-  player.y += y_vel * game_deltatime();
+  player.x += x_speed;
+  player.y += y_speed;
 }
 
 void player_render() {
