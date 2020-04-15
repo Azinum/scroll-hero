@@ -7,6 +7,7 @@
 #include "window.h"
 #include "texture.h"
 
+static void* texture_from_image(struct Image* image);
 
 void* texture_from_image(struct Image* image) {
   assert(image != NULL);
@@ -24,6 +25,15 @@ void* texture_from_image(struct Image* image) {
     0xff000000
   );
   texture = SDL_CreateTextureFromSurface(window_renderer(), surface);
+  return texture;
+}
+
+void* texture_load_from_file(const char* path) {
+  void* texture = NULL;
+  struct Image image;
+  image_load_png(path, &image);
+  texture = texture_from_image(&image);
+  image_free_pixel_buffer(image.pixel_buffer);
   return texture;
 }
 

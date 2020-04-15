@@ -4,6 +4,7 @@
 #include "render.h"
 #include "camera.h"
 #include "window.h"
+#include "texture.h"
 #include "game.h"
 #include "entity.h"
 
@@ -12,10 +13,12 @@
 static short player_speed = 4;
 static short x_speed = 0;
 static short y_speed = 0;
+static void* texture;
 
 void player_init() {
   player.x = 80;
   player.y = 150;
+  texture = texture_load_from_file("resources/sprites/boy.png");
 }
 
 void player_update() {
@@ -48,7 +51,9 @@ void player_update() {
 }
 
 void player_render() {
-  render_fill_rect(player.x - camera.x, player.y - camera.y, 20, 20, 100, 100, 255, 255);
+  render_texture(player.x - camera.x, player.y - camera.y, 40, 40, texture);
 }
 
-
+void player_free() {
+  texture_free(texture);
+}

@@ -40,3 +40,13 @@ void render_text(int x, int y, float size, const char* text) {
   SDL_FreeSurface(surface);
   SDL_DestroyTexture(texture);
 }
+
+void render_texture(int x, int y, int w, int h, void* texture) {
+  assert(texture != NULL);
+  SDL_Renderer* renderer = window_renderer();
+  SDL_Rect rect = (struct SDL_Rect) {x, y, w, h};
+  SDL_RenderCopy(renderer, texture, NULL, &rect);
+#if 1 // Debug
+  render_rect(x, y, w, h, 255, 50, 50, 255);
+#endif
+}

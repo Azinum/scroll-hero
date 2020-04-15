@@ -4,8 +4,6 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "common.h"
-#include "image.h"
-#include "texture.h"
 #include "player.h"
 #include "window.h"
 
@@ -18,8 +16,6 @@ struct Window {
 };
 
 static struct Window window;
-
-void* texture;
 
 int window_init(const char* screen_title, int screen_width, int screen_height) {
   log_out("Window init (w: %i, h: %i)\n", screen_width, screen_height);
@@ -59,11 +55,6 @@ int window_init(const char* screen_title, int screen_width, int screen_height) {
     log_out("TTF_OpenFont: %s\n", TTF_GetError());
     return ERR;
   }
-
-  struct Image image;
-  image_load_png("resources/sprites/boy.png", &image);
-  texture = texture_from_image(&image);
-  image_free_pixel_buffer(image.pixel_buffer);
   window.init = 1;
   return NO_ERR;
 }
@@ -121,15 +112,10 @@ void window_clear() {
 
 void window_render() {
   assert(window.renderer != NULL);
-
-  SDL_Rect rect = (struct SDL_Rect) {player.x, player.y, 16*3, 16*3};
-  SDL_RenderCopy(window.renderer, texture, NULL, &rect);
-
   SDL_RenderPresent(window.renderer);
 }
 
 void window_free() {
-  texture_free(texture);
   SDL_DestroyWindow(window.window);
   SDL_DestroyRenderer(window.renderer);
   TTF_CloseFont(window.font);

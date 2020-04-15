@@ -13,4 +13,6 @@ void player_update();
 
 void player_render();
 
+void player_free();
+
 #endif

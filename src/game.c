@@ -57,6 +57,7 @@ int game_execute(int argc, char** argv) {
     window_clear();
   }
   entities_clear(entities);
+  player_free();
   window_free();
   return 0;
 }
