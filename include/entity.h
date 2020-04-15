@@ -3,14 +3,22 @@
 #ifndef _ENTITY_H
 #define _ENTITY_H
 
+struct Box {
+  unsigned char top;
+  unsigned char bottom;
+  unsigned char left;
+  unsigned char right;
+};
+
 struct Entity {
   struct Entity* prev;
   struct Entity* next;
   short id;
   int x;
   int y;
-  int w;
-  int h;
+  int x_next;
+  int y_next;
+  struct Box hitbox;
 };
 
 extern struct Entity* entities;

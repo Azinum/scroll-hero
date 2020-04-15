@@ -4,6 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "common.h"
+#include "image.h"
 #include "window.h"
 
 struct Window {
@@ -111,6 +112,26 @@ void window_clear() {
 
 void window_render() {
   assert(window.renderer != NULL);
+
+  /* SDL_Texture* texture = NULL;
+  int w = 16;
+  int h = 16;
+  SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(
+    buf,
+    w, h,
+    32,
+    4 * w,
+    0x000000ff,
+    0x0000ff00,
+    0x00ff0000,
+    0xff000000
+  );
+
+  SDL_Rect rect = (struct SDL_Rect) {100, 130, 16*3, 16*3};
+  texture = SDL_CreateTextureFromSurface(window.renderer, surface);
+  SDL_RenderCopy(window.renderer, texture, NULL, &rect);
+  */
+
   SDL_RenderPresent(window.renderer);
 }
 

@@ -14,7 +14,7 @@ BUILD_DIR=build
 
 RESOURCES_DIR=resources
 
-LIBS=-lSDL2 -lSDL2_ttf
+LIBS=-lSDL2 -lSDL2_ttf -lpng
 
 FLAGS=$(SRC_FILES) -I$(INCLUDE_DIR) -o $(BUILD_DIR)/$(PROG_NAME) -O2 -Wall
 

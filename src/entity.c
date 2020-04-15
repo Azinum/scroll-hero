@@ -1,5 +1,7 @@
 // entity.c
 
+#include <string.h>
+
 #include "common.h"
 #include "camera.h"
 #include "list.h"
@@ -10,29 +12,28 @@ static int entity_count = 0;
 struct Entity* entities = NULL;
 struct Entity* inactive_entities = NULL;
 
-static struct Entity* entity_alloc(int x, int y, int w, int h, short id);
+static struct Entity* entity_alloc();
 
-struct Entity* entity_alloc(int x, int y, int w, int h, short id) {
-  struct Entity* e = malloc(sizeof(struct Entity));
+struct Entity* entity_alloc() {
+  struct Entity* entity = malloc(sizeof(struct Entity));
+  if (!entity) {
+    log_out("Failed to allocate memory for entity\n");
+    return NULL;
+  }
+  memset(entity, 0, sizeof(struct Entity));
+  return entity;
+}
+
+struct Entity* entity_add(int x, int y) {
+  short id = entity_count++;
+  struct Entity* e = entity_alloc();
   if (!e)
     return NULL;
   e->id = id;
   e->x = x;
   e->y = y;
-  e->w = w;
-  e->h = h;
+  LIST_PUSH(entities, e);
   return e;
-}
-
-struct Entity* entity_add(int x, int y) {
-  short id = entity_count++;
-  struct Entity* entity = entity_alloc(x, y, 20, 20, id);
-  if (!entity) {
-    log_out("Failed to allocate memory for entity\n");
-    return NULL;
-  }
-  LIST_PUSH(entities, entity);
-  return entity;
 }
 
 struct Entity* entity_remove(struct Entity* entity) {
@@ -54,7 +55,7 @@ void entities_update() {
 void entities_render() {
   const struct Entity* e = entities;
   while (e) {
-    render_fill_rect(e->x - camera.x, e->y - camera.y, e->w, e->h, 255, 100, 100, 255);
+    render_fill_rect(e->x - camera.x, e->y - camera.y, 20, 20, 255, 100, 100, 255);
     e = e->next;
   }
 }

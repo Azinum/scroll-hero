@@ -16,8 +16,6 @@ static short y_speed = 0;
 void player_init() {
   player.x = 80;
   player.y = 150;
-  player.w = 20;
-  player.h = 20;
 }
 
 void player_update() {
@@ -50,5 +48,7 @@ void player_update() {
 }
 
 void player_render() {
-  render_fill_rect(player.x - camera.x, player.y - camera.y, player.w, player.h, 100, 100, 255, 255);
+  render_fill_rect(player.x - camera.x, player.y - camera.y, 20, 20, 100, 100, 255, 255);
 }
+
+

@@ -14,20 +14,24 @@
 
 #define TITLE_LENGTH_MAX 32
 
-static double deltatime = 1;
-static double totaltime = 0;
+double deltatime = 0;
+double totaltime = 0;
+
+static int game_init() {
+  camera_init();
+  player_init();
+
+  entity_add(50, 140);
+  entity_add(150, 230);
+  return 0;
+}
 
 int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
   if (window_init("Generic game | 800x600", 800, 600) != 0)
     return -1;
 
-  camera_init();
-  player_init();
-
-  entity_add(50, 140);
-  entity_add(150, 230);
-
+  game_init();
   double time_now = 0;
   double time_last = 0;
   const double deltatime_max = 0.25f;
@@ -55,12 +59,4 @@ int game_execute(int argc, char** argv) {
   entities_clear(entities);
   window_free();
   return 0;
-}
-
-double game_deltatime() {
-  return deltatime;
-}
-
-double game_totaltime() {
-  return totaltime;
 }
