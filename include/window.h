@@ -3,13 +3,13 @@
 #ifndef _WINDOW_H
 #define _WINDOW_H
 
-int window_init(const char* screen_title, int screen_width, int screen_height);
+int window_init(const char* screen_title, int32_t screen_width, int32_t screen_height);
 
 void* window_renderer();
 
 void* window_font();
 
-const unsigned char* window_keyboardstate();
+const uint8_t* window_keyboardstate();
 
 int window_pollevent();
 

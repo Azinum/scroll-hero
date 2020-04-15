@@ -17,7 +17,7 @@ struct Window {
 
 static struct Window window;
 
-int window_init(const char* screen_title, int screen_width, int screen_height) {
+int window_init(const char* screen_title, int32_t screen_width, int32_t screen_height) {
   log_out("Window init (w: %i, h: %i)\n", screen_width, screen_height);
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
     log_out("%s\n", SDL_GetError());
@@ -67,7 +67,7 @@ void* window_font() {
   return window.font;
 }
 
-const unsigned char* window_keyboardstate() {
+const uint8_t* window_keyboardstate() {
   return SDL_GetKeyboardState(NULL);
 }
 

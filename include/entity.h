@@ -4,27 +4,27 @@
 #define _ENTITY_H
 
 struct Box {
-  unsigned char top;
-  unsigned char bottom;
-  unsigned char left;
-  unsigned char right;
+  uint8_t top;
+  uint8_t bottom;
+  uint8_t left;
+  uint8_t right;
 };
 
 struct Entity {
   struct Entity* prev;
   struct Entity* next;
-  short id;
-  int x;
-  int y;
-  int x_next;
-  int y_next;
+  int16_t id;
+  int32_t x;
+  int32_t y;
+  int32_t x_next;
+  int32_t y_next;
   struct Box hitbox;
 };
 
 extern struct Entity* entities;
 extern struct Entity* inactive_entities;
 
-struct Entity* entity_add(int x, int y);
+struct Entity* entity_add(int32_t x, int32_t y);
 
 struct Entity* entity_remove(struct Entity* entity);
 

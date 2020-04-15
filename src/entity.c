@@ -8,7 +8,7 @@
 #include "render.h"
 #include "entity.h"
 
-static int entity_count = 0;
+static int32_t entity_count = 0;
 struct Entity* entities = NULL;
 struct Entity* inactive_entities = NULL;
 
@@ -24,7 +24,7 @@ struct Entity* entity_alloc() {
   return entity;
 }
 
-struct Entity* entity_add(int x, int y) {
+struct Entity* entity_add(int32_t x, int32_t y) {
   short id = entity_count++;
   struct Entity* e = entity_alloc();
   if (!e)
@@ -55,7 +55,7 @@ void entities_update() {
 void entities_render() {
   const struct Entity* e = entities;
   while (e) {
-    render_fill_rect(e->x - camera.x, e->y - camera.y, 20, 20, 255, 100, 100, 255);
+    render_fill_rect(e->x - camera.x, e->y - camera.y, 32, 32, 110, 100, 255, 255);
     e = e->next;
   }
 }

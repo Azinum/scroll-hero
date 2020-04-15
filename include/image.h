@@ -3,18 +3,16 @@
 #ifndef _IMAGE_H
 #define _IMAGE_H
 
-#include <stdint.h>
-
 struct Image {
-  unsigned char* pixel_buffer;
-  int width;
-  int height;
-  int depth;
-  int pitch;
+  uint8_t* pixel_buffer;
+  int32_t width;
+  int32_t height;
+  int32_t depth;
+  int32_t pitch;
 };
 
-int image_load_png(const char* file_name, struct Image* image);
+int32_t image_load_png(const char* file_name, struct Image* image);
 
-void image_free_pixel_buffer(unsigned char* pixel_buffer);
+void image_free_pixel_buffer(uint8_t* pixel_buffer);
 
 #endif

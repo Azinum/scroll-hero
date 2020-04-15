@@ -13,17 +13,15 @@
 #include "game.h"
 
 #define TITLE_LENGTH_MAX 32
-
 double deltatime = 0;
 double totaltime = 0;
 
-static int game_init() {
+static void game_init() {
   camera_init();
   player_init();
 
   entity_add(50, 140);
   entity_add(150, 230);
-  return 0;
 }
 
 int game_execute(int argc, char** argv) {
@@ -34,12 +32,12 @@ int game_execute(int argc, char** argv) {
   game_init();
   double time_now = 0;
   double time_last = 0;
-  const double deltatime_max = 0.25f;
+  double deltatime_max = 20.0f;
 
   while (!window_pollevent()) {
     time_last = time_now;
     time_now = window_time();
-    deltatime = ((double)(time_now - time_last)) / (CLOCKS_PER_SEC * 1000);
+    deltatime = (time_now - time_last) / (CLOCKS_PER_SEC);
     if (deltatime > deltatime_max)
       deltatime = deltatime_max;
     totaltime += deltatime;

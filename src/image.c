@@ -7,13 +7,13 @@
 
 #include "image.h"
 
-int image_load_png(const char* file_name, struct Image* image) {
+int32_t image_load_png(const char* file_name, struct Image* image) {
   FILE* file = fopen(file_name, "rb");
   assert(file != NULL);
   if (!file)
     return -1;
 
-  unsigned char signature[8];
+  uint8_t signature[8];
   if (fread(signature, 1, sizeof(signature), file) < 8) {
     fclose(file);
     return -1;
@@ -40,7 +40,6 @@ int image_load_png(const char* file_name, struct Image* image) {
       free(image->pixel_buffer);
       image->pixel_buffer = NULL;
     }
-
     return -1;
   }
   png_init_io(png, file);
@@ -91,16 +90,16 @@ int image_load_png(const char* file_name, struct Image* image) {
       return -1;
   }
 
-  unsigned int bpp = png_get_rowbytes(png, info) / image->width;
+  uint32_t bpp = png_get_rowbytes(png, info) / image->width;
 
   png_set_interlace_handling(png);
   png_read_update_info(png, info);
 
-  image->pixel_buffer = malloc(sizeof(unsigned char) * image->width * image->height * bpp);
+  image->pixel_buffer = malloc(sizeof(uint8_t) * image->width * image->height * bpp);
   png_bytep rows[image->height];
 
-  unsigned char* pixels = image->pixel_buffer;
-  for (int i = 0; i < image->height; i++) {
+  uint8_t* pixels = image->pixel_buffer;
+  for (int32_t i = 0; i < image->height; i++) {
     rows[i] = pixels;
     pixels += image->width * bpp;
   }
@@ -114,7 +113,7 @@ int image_load_png(const char* file_name, struct Image* image) {
 }
 
 
-void image_free_pixel_buffer(unsigned char* pixel_buffer) {
+void image_free_pixel_buffer(uint8_t* pixel_buffer) {
   assert(pixel_buffer != NULL);
   free(pixel_buffer);
 }
