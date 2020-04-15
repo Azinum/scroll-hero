@@ -3,6 +3,8 @@
 #ifndef _IMAGE_H
 #define _IMAGE_H
 
+#include <stdint.h>
+
 struct Image {
   unsigned char* pixel_buffer;
   int width;

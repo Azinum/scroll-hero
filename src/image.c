@@ -1,9 +1,10 @@
 // image.c
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
 #include <png.h>
 
-#include "common.h"
 #include "image.h"
 
 int image_load_png(const char* file_name, struct Image* image) {
