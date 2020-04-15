@@ -5,7 +5,7 @@
 
 #include "entity.h"
 
-struct Entity player;
+extern struct Entity* player;
 
 void player_init();
 

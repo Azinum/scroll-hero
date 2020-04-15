@@ -3,6 +3,11 @@
 #ifndef _ENTITY_H
 #define _ENTITY_H
 
+enum Entity_type {
+  ENTITY_MOVABLE = 1 << 0,
+  ENTITY_VISIBLE = 1 << 1,
+};
+
 struct Box {
   uint8_t top;
   uint8_t bottom;
@@ -18,7 +23,10 @@ struct Entity {
   int32_t y;
   int32_t x_next;
   int32_t y_next;
+  int16_t x_speed;
+  int16_t y_speed;
   struct Box hitbox;
+  int32_t type;
 };
 
 extern struct Entity* entities;
