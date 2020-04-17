@@ -12,7 +12,8 @@
 
 static int16_t player_speed = 6;
 static int16_t gravity = 1;
-static int16_t jump_speed = 16;
+static int16_t jump_speed = 14;
+static uint16_t super_jump_speed = 30;
 struct Entity* player;
 static void* texture;
 
@@ -27,6 +28,9 @@ void player_update() {
   
   if (state[26] && player->grounded)  // Keycode for 'w'
     player->y_speed = -jump_speed;
+
+  if (state[27] && player->grounded)  // 'x'
+    player->y_speed = -super_jump_speed;
 
   if (state[4])
     player->x_speed = -player_speed;

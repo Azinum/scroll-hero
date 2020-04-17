@@ -21,12 +21,12 @@ static void game_init() {
   camera_init();
   player_init();
 
-  for (uint32_t i = 0; i < 15; i++) {
-    entity_add(rand() % 800, rand() % 500);
+  for (uint32_t i = 0; i < 20; i++) {
+    entity_add(rand() % 800, rand() % 400);
   }
 
-  for (uint32_t i = 0; i < 40; i++) {
-    entity_add(i * 32, 570);
+  for (uint32_t i = 0; i < 45; i++) {
+    entity_add(i * 32, 450 + (i * 6));
   }
 }
 
