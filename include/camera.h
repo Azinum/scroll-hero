@@ -4,8 +4,8 @@
 #define _CAMERA_H
 
 struct {
-  int x;
-  int y;
+  int32_t x;
+  int32_t y;
 } camera;
 
 void camera_init();

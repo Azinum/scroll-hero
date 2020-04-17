@@ -20,7 +20,7 @@ static void* texture;
 void player_init() {
   player = entity_add(100, 150);
   player->flags = ENTITY_MOVABLE;
-  texture = texture_load_from_file("resources/sprites/boy-8x8.png");
+  texture = texture_load_from_file("resources/sprites/boy.png");
 }
 
 void player_update() {

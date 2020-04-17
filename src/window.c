@@ -12,7 +12,7 @@ struct Window {
   SDL_Window* window;
   SDL_Event event;
   TTF_Font* font;
-  unsigned char init;
+  uint8_t init;
 };
 
 static struct Window window;

@@ -13,6 +13,8 @@
 #include "game.h"
 
 #define TITLE_LENGTH_MAX 32
+#define TILE_SIZE 32
+
 double deltatime = 0;
 double totaltime = 0;
 
@@ -22,17 +24,19 @@ static void game_init() {
   player_init();
 
   for (uint32_t i = 0; i < 20; i++) {
-    entity_add(rand() % 800, rand() % 400);
+    int x = rand() % 800;
+    int y = rand() % 400;
+    entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE));
   }
 
-  for (uint32_t i = 0; i < 45; i++) {
-    entity_add(i * 32, 450 + (i * 6));
+  for (uint32_t i = 0; i < 80; i++) {
+    entity_add(i * TILE_SIZE, 450 + (i * 6));
   }
 }
 
 int game_execute(int argc, char** argv) {
   log_out("%s\n", "Game has been initialized");
-  if (window_init("Generic game | 800x600", 800, 600) != 0)
+  if (window_init("Generic game | 800x600", SCREEN_WIDTH, SCREEN_HEIGHT) != 0)
     return -1;
 
   game_init();

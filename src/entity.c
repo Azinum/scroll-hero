@@ -120,7 +120,8 @@ void entities_render() {
   const struct Entity* e = entities;
   while (e) {
     if (e->flags & ENTITY_VISIBLE) {
-      render_fill_rect(e->x - camera.x, e->y - camera.y, 32, 32, 110, 100, 255, 255);
+      render_texture(e->x - camera.x, e->y - camera.y, 32, 32, NULL);
+      render_rect(e->x - camera.x, e->y - camera.y, 32, 32, 100, 100, 255, 255);
     }
     e = e->next;
   }
