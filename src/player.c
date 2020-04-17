@@ -10,7 +10,9 @@
 
 #include "player.h"
 
-static int16_t player_speed = 8;
+static int16_t player_speed = 6;
+static int16_t gravity = 1;
+static int16_t jump_speed = 16;
 struct Entity* player;
 static void* texture;
 
@@ -22,13 +24,9 @@ void player_init() {
 
 void player_update() {
   const uint8_t* state = window_keyboardstate();
- 
-  if (state[26])
-    player->y_speed = -player_speed;
-  else if (state[22])
-    player->y_speed = player_speed;
-  else
-    player->y_speed *= 0.5f;
+  
+  if (state[26] && player->grounded)  // Keycode for 'w'
+    player->y_speed = -jump_speed;
 
   if (state[4])
     player->x_speed = -player_speed;
@@ -36,6 +34,8 @@ void player_update() {
     player->x_speed = player_speed;
   else
     player->x_speed *= 0.5f;
+
+  player->y_speed += gravity;
 }
 
 void player_render() {

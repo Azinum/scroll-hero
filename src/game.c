@@ -17,11 +17,17 @@ double deltatime = 0;
 double totaltime = 0;
 
 static void game_init() {
+  srand(time(NULL));
   camera_init();
   player_init();
 
-  entity_add(50, 140);
-  entity_add(150, 230);
+  for (uint32_t i = 0; i < 15; i++) {
+    entity_add(rand() % 800, rand() % 500);
+  }
+
+  for (uint32_t i = 0; i < 40; i++) {
+    entity_add(i * 32, 570);
+  }
 }
 
 int game_execute(int argc, char** argv) {

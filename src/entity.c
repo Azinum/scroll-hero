@@ -46,7 +46,6 @@ uint8_t entity_collision(struct Entity* e) {
       int32_t h = (TEMP_HEIGHT + TEMP_HEIGHT) >> 1; // target->w + e->w
       int32_t dx = (e->x_next + (TEMP_WIDTH >> 1)) - (entity->x + (TEMP_WIDTH >> 1));
       int32_t dy = (e->y_next + (TEMP_HEIGHT >> 1)) - (entity->y + (TEMP_HEIGHT >> 1));
-      // printf("dx: %i, dy: %i, w: %i, h: %i\n", dx, dy, w, h);
       if (abs(dx) <= w && abs(dy) <= h) {
         int32_t wy = w * dy;
         int32_t hx = h * dx;
@@ -69,6 +68,7 @@ uint8_t entity_collision(struct Entity* e) {
           else {   // Bottom
             e->y_next = entity->y - TEMP_HEIGHT; // - entity->body.h;
             e->y_speed = 0;
+            e->grounded = 1;
           }
         }
       }
@@ -105,6 +105,7 @@ void entities_update() {
   while (entity) {
     next = entity->next;
     if (entity->flags & ENTITY_MOVABLE) {
+      entity->grounded = 0;
       entity->x_next += entity->x_speed;
       entity->y_next += entity->y_speed;
       entity_collision(entity);
