@@ -12,13 +12,15 @@ void camera_init() {
 void camera_update() {
   if (!player)
     return;
-  if (
-    player->x > (camera.x + (SCREEN_WIDTH * 0.90f))  ||
-    player->x < (camera.x + (SCREEN_WIDTH * 0.10f))  ||
-    player->y > (camera.y + (SCREEN_HEIGHT * 0.90f)) ||
-    player->y < (camera.y + (SCREEN_HEIGHT * 0.10f))
-  ) {
-    camera.x = player->x + (-SCREEN_CENTER_X);
+
+  if (player->y > (camera.y + (SCREEN_HEIGHT * 0.90f)) ||
+      player->y < (camera.y + (SCREEN_HEIGHT * 0.10f))) {
     camera.y = player->y + (-SCREEN_CENTER_Y);
   }
+
+  if (player->x > (camera.x + (SCREEN_WIDTH * 0.6f)))
+    camera.x = player->x + (-(SCREEN_WIDTH) * 0.6f);
+
+  if (player->x < (camera.x + (SCREEN_WIDTH * 0.4f)))
+    camera.x = player->x + (-(SCREEN_WIDTH) * 0.4f);
 }
