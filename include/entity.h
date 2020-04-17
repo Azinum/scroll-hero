@@ -4,8 +4,9 @@
 #define _ENTITY_H
 
 enum Entity_type {
-  ENTITY_MOVABLE = 1 << 0,
-  ENTITY_VISIBLE = 1 << 1,
+  ENTITY_MOVABLE  = 1 << 0,
+  ENTITY_VISIBLE  = 1 << 1,
+  ENTITY_STATIC   = 1 << 2,
 };
 
 struct Box {
@@ -19,14 +20,15 @@ struct Entity {
   struct Entity* prev;
   struct Entity* next;
   int16_t id;
+  int32_t flags;
   int32_t x;
   int32_t y;
   int32_t x_next;
   int32_t y_next;
   int16_t x_speed;
   int16_t y_speed;
+  uint8_t grounded;
   struct Box hitbox;
-  int32_t type;
 };
 
 extern struct Entity* entities;

@@ -10,14 +10,14 @@
 
 #include "player.h"
 
-static int16_t player_speed = 6;
+static int16_t player_speed = 8;
 struct Entity* player;
 static void* texture;
 
 void player_init() {
-  player = entity_add(80, 150);
-  player->type = ENTITY_MOVABLE;
-  texture = texture_load_from_file("resources/sprites/boy.png");
+  player = entity_add(100, 150);
+  player->flags = ENTITY_MOVABLE;
+  texture = texture_load_from_file("resources/sprites/boy-8x8.png");
 }
 
 void player_update() {
