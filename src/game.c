@@ -23,8 +23,8 @@ static void game_init() {
   camera_init();
   player_init();
 
-  for (uint32_t i = 0; i < 20; i++) {
-    int x = rand() % 800;
+  for (uint32_t i = 0; i < 200; i++) {
+    int x = rand() % 1600 - rand() % 800;
     int y = rand() % 400;
     entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE));
   }

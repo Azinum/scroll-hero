@@ -13,10 +13,11 @@ void camera_update() {
   if (!player)
     return;
 
-  if (player->y > (camera.y + (SCREEN_HEIGHT * 0.90f)) ||
-      player->y < (camera.y + (SCREEN_HEIGHT * 0.10f))) {
-    camera.y = player->y + (-SCREEN_CENTER_Y);
-  }
+  if (player->y > (camera.y + (SCREEN_HEIGHT * 0.70f)))
+    camera.y = player->y + (-(SCREEN_HEIGHT * 0.70f));
+
+  if (player->y < (camera.y + (SCREEN_HEIGHT * 0.30f)))
+    camera.y = player->y + (-(SCREEN_HEIGHT * 0.30f));
 
   if (player->x > (camera.x + (SCREEN_WIDTH * 0.6f)))
     camera.x = player->x + (-(SCREEN_WIDTH) * 0.6f);

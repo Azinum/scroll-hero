@@ -105,9 +105,9 @@ void entities_update() {
   while (entity) {
     next = entity->next;
     if (entity->flags & ENTITY_MOVABLE) {
-      entity->grounded = 0;
       entity->x_next += entity->x_speed;
       entity->y_next += entity->y_speed;
+      entity->grounded = 0;
       entity_collision(entity);
       entity->x = entity->x_next;
       entity->y = entity->y_next;

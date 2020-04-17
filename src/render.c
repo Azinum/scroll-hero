@@ -55,7 +55,7 @@ void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, void* texture) {
   SDL_Renderer* renderer = window_renderer();
   SDL_Rect rect = (struct SDL_Rect) {x, y, w, h};
   SDL_RenderCopy(renderer, texture, NULL, &rect);
-#if 1 // Debug
+#if 0
   render_rect(x, y, w, h, 255, 50, 50, 255);
 #endif
 }
