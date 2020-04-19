@@ -10,6 +10,8 @@ SRC_DIR=src
 
 SRC_FILES=$(SRC_DIR)/*.c
 
+SRC_FILES+=$(SRC_DIR)/entity_types/*.c
+
 BUILD_DIR=build
 
 RESOURCES_DIR=resources

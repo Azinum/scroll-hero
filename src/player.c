@@ -7,25 +7,27 @@
 #include "texture.h"
 #include "game.h"
 #include "entity.h"
+#include "entity_types.h"
 
 #include "player.h"
 
-static int16_t player_speed = 6;
+static int16_t player_speed = 5;
 static int16_t gravity = 1;
-static int16_t jump_speed = 14;
-static uint16_t super_jump_speed = 30;
+static int16_t jump_speed = 10;
+static int16_t max_speed = 20;
+static uint16_t super_jump_speed = 20;
 struct Entity* player;
 static void* texture;
 
 void player_init() {
-  player = entity_add(100, 150);
-  player->flags = ENTITY_MOVABLE;
+  player = entity_add(100, 150, ENTITY_PLAYER);
+  player->flags = FLAGS_COLLIDABLE;
   texture = texture_load_from_file("resources/sprites/boy.png");
 }
 
 void player_update() {
   const uint8_t* state = window_keyboardstate();
-  
+
   if (state[26] && player->grounded)  // Keycode for 'w'
     player->y_speed = -jump_speed;
 
@@ -39,11 +41,19 @@ void player_update() {
   else
     player->x_speed *= 0.5f;
 
-  player->y_speed += gravity;
+  if (!(game_tick % 2))
+    player->y_speed += gravity;
+
+  if (player->y_speed > 0 && player->y_speed > max_speed)
+    player->y_speed = max_speed;
+
+  if (player->y_speed < 0 && player->y_speed < -max_speed)
+    player->y_speed = -max_speed;
 }
 
 void player_render() {
   render_texture(player->x - camera.x, player->y - camera.y, 32, 32, texture);
+  render_rect(player->x - camera.x, player->y - camera.y, 32, 32, 255, 90, 130, 255);
 }
 
 void player_free() {

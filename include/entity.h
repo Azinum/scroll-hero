@@ -3,10 +3,10 @@
 #ifndef _ENTITY_H
 #define _ENTITY_H
 
-enum Entity_type {
-  ENTITY_MOVABLE  = 1 << 0,
-  ENTITY_VISIBLE  = 1 << 1,
-  ENTITY_STATIC   = 1 << 2,
+enum Entity_flags {
+  FLAGS_COLLIDABLE  = 1 << 0,
+  FLAGS_VISIBLE     = 1 << 1,
+  FLAGS_STATIC      = 1 << 2,
 };
 
 struct Box {
@@ -21,6 +21,7 @@ struct Entity {
   struct Entity* next;
   int16_t id;
   int32_t flags;
+  int16_t type;
   int32_t x;
   int32_t y;
   int32_t x_next;
@@ -28,13 +29,14 @@ struct Entity {
   int16_t x_speed;
   int16_t y_speed;
   uint8_t grounded;
+  int16_t interval;
   struct Box hitbox;
 };
 
 extern struct Entity* entities;
 extern struct Entity* inactive_entities;
 
-struct Entity* entity_add(int32_t x, int32_t y);
+struct Entity* entity_add(int32_t x, int32_t y, int16_t type);
 
 struct Entity* entity_remove(struct Entity* entity);
 

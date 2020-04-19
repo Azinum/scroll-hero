@@ -9,6 +9,7 @@
 #include "hud.h"
 #include "render.h"
 #include "window.h"
+#include "entity_types.h"
 
 #include "game.h"
 
@@ -17,20 +18,23 @@
 
 double deltatime = 0;
 double totaltime = 0;
+int16_t game_tick = 0;
 
 static void game_init() {
   srand(time(NULL));
   camera_init();
   player_init();
 
-  for (uint32_t i = 0; i < 200; i++) {
-    int x = rand() % 1600 - rand() % 800;
-    int y = rand() % 400;
-    entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE));
+  for (uint32_t i = 0; i < 60; i++) {
+    // int x = rand() % 800;
+    // int y = rand() % 400;
+    int x = i * TILE_SIZE;
+    int y = 400;
+    entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE), ENTITY_MONSTER);
   }
 
   for (uint32_t i = 0; i < 80; i++) {
-    entity_add(i * TILE_SIZE, 450 + (i * 6));
+    entity_add(i * TILE_SIZE, 450, -1);
   }
 }
 
@@ -45,6 +49,7 @@ int game_execute(int argc, char** argv) {
   double deltatime_max = 20.0f;
 
   while (!window_pollevent()) {
+    game_tick++;
     time_last = time_now;
     time_now = window_time();
     deltatime = (time_now - time_last) / (CLOCKS_PER_SEC);
@@ -52,9 +57,9 @@ int game_execute(int argc, char** argv) {
       deltatime = deltatime_max;
     totaltime += deltatime;
 
-    camera_update();
-    entities_update();
     player_update();
+    entities_update();
+    camera_update();
 
     entities_render();
     player_render();
