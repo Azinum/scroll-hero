@@ -55,24 +55,20 @@ uint8_t entity_collision(struct Entity* e) {
         if (wy > hx) {
           if (wy > -hx) { // Top
             e->y_next -= (dy - h);
-            // e->y_next = target->y + TEMP_HEIGHT; // + target->body.h
             e->y_speed = 0;
           }
           else {   // Right
             e->x_next -= (dx + w);
-            // e->x_next = target->x - TEMP_WIDTH; // - target->body.w;
             e->x_speed = 0;
           }
         }
         else {
           if (wy > -hx) {   // Left
             e->x_next -= (dx - w);
-            // e->x_next = target->x + TEMP_WIDTH; // + target->body.w;
             e->x_speed = 0;
           }
           else {   // Bottom
             e->y_next -= (dy + h);
-            // e->y_next = target->y - TEMP_HEIGHT; // - target->body.h;
             e->y_speed = 0;
             e->grounded = 1;
           }
@@ -92,7 +88,7 @@ struct Entity* entity_add(int32_t x, int32_t y, int16_t type) {
   e->id = id;
   e->x = e->x_next = x;
   e->y = e->y_next = y;
-  e->flags = FLAGS_COLLIDABLE | FLAGS_VISIBLE;
+  e->flags = FLAGS_VISIBLE;
   e->type = type;
   if (e->type > 0) {
     entity_types[e->type].init(e);
@@ -116,6 +112,11 @@ void entities_update() {
     if (entity->type > 0) {
       entity_types[entity->type].update(entity);
     }
+    if (entity->flags & FLAGS_STATIC) {
+      entity = next;
+      continue;
+    }
+
     if (entity->flags & FLAGS_COLLIDABLE) {
       entity->x_next += entity->x_speed;
       entity->y_next += entity->y_speed;
@@ -133,7 +134,6 @@ void entities_render() {
   while (e) {
     if (e->flags & FLAGS_VISIBLE) {
       render_texture(e->x - camera.x, e->y - camera.y, 32, 32, NULL);
-      render_rect(e->x - camera.x, e->y - camera.y, 32, 32, 100, 100, 255, 255);
     }
     e = e->next;
   }

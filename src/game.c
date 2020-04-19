@@ -26,15 +26,14 @@ static void game_init() {
   player_init();
 
   for (uint32_t i = 0; i < 60; i++) {
-    // int x = rand() % 800;
-    // int y = rand() % 400;
     int x = i * TILE_SIZE;
     int y = 400;
     entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE), ENTITY_MONSTER);
   }
 
   for (uint32_t i = 0; i < 80; i++) {
-    entity_add(i * TILE_SIZE, 450, -1);
+    struct Entity* e = entity_add(i * TILE_SIZE, 450, -1);
+    e->flags |= FLAGS_STATIC | FLAGS_COLLIDABLE;
   }
 }
 

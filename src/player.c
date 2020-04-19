@@ -22,7 +22,7 @@ static void* texture;
 void player_init() {
   player = entity_add(100, 150, ENTITY_PLAYER);
   player->flags = FLAGS_COLLIDABLE;
-  texture = texture_load_from_file("resources/sprites/boy.png");
+  texture = texture_load_from_file("resources/sprites/boy-with-helm.png");
 }
 
 void player_update() {
@@ -53,7 +53,6 @@ void player_update() {
 
 void player_render() {
   render_texture(player->x - camera.x, player->y - camera.y, 32, 32, texture);
-  render_rect(player->x - camera.x, player->y - camera.y, 32, 32, 255, 90, 130, 255);
 }
 
 void player_free() {

@@ -47,7 +47,7 @@ void render_text(int32_t x, int32_t y, float size, const char* text) {
 void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, void* texture) {
   // assert(texture != NULL);
   if (!temp_texture) {
-    temp_texture = texture_load_from_file("resources/sprites/tile.png");
+    temp_texture = texture_load_from_file("resources/sprites/tile-brick.png");
   }
   if (!texture) {
     texture = temp_texture;

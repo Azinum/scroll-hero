@@ -13,12 +13,12 @@ void init_monster(struct Entity* entity) {
 }
 
 void update_monster(struct Entity* entity) {
-  if (!(game_tick % 2))
+  if (!(game_tick % 5))
     entity->y_speed += gravity;
 
   if (!(game_tick % entity->interval)) {
     if (entity->grounded)
-      entity->y_speed = -15;
+      entity->y_speed = -5;
   }
 }
 
