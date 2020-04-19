@@ -33,12 +33,13 @@ struct Entity {
   struct Box hitbox;
 };
 
+extern int32_t entity_count;
 extern struct Entity* entities;
 extern struct Entity* inactive_entities;
 
 struct Entity* entity_add(int32_t x, int32_t y, int16_t type);
 
-struct Entity* entity_remove(struct Entity* entity);
+struct Entity* entity_delete(struct Entity* entity);
 
 void entities_update();
 

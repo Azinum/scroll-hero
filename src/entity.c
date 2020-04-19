@@ -12,7 +12,7 @@
 
 #include "entity.h"
 
-static int32_t entity_count = 0;
+int32_t entity_count = 0;
 struct Entity* entities = NULL;
 struct Entity* inactive_entities = NULL;
 
@@ -97,10 +97,11 @@ struct Entity* entity_add(int32_t x, int32_t y, int16_t type) {
   return e;
 }
 
-struct Entity* entity_remove(struct Entity* entity) {
+struct Entity* entity_delete(struct Entity* entity) {
   struct Entity* next = entity->next;
   LIST_REMOVE(entities, entity);
   free(entity);
+  entity_count--;
   return next;
 }
 
@@ -142,4 +143,5 @@ void entities_render() {
 void entities_clear() {
   LIST_CLEAR(entities);
   LIST_CLEAR(inactive_entities);
+  entity_count = 0;
 }

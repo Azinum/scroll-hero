@@ -29,7 +29,7 @@ int window_init(const char* screen_title, int32_t screen_width, int32_t screen_h
     SDL_WINDOWPOS_CENTERED,
     screen_width,
     screen_height,
-    0
+    SDL_WINDOW_FULLSCREEN
   );
   if (!window.window) {
     log_out("%s\n", SDL_GetError());

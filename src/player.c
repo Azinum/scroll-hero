@@ -22,7 +22,7 @@ static void* texture;
 void player_init() {
   player = entity_add(100, 150, ENTITY_PLAYER);
   player->flags = FLAGS_COLLIDABLE;
-  texture = texture_load_from_file("resources/sprites/boy-with-helm.png");
+  texture = texture_load_from_file("resources/sprites/wizard.png");
 }
 
 void player_update() {

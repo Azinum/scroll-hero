@@ -9,7 +9,7 @@ static int16_t gravity = 1;
 
 void init_monster(struct Entity* entity) {
   entity->flags |= FLAGS_COLLIDABLE;
-  entity->interval = 60 + (5 * entity->id);
+  entity->interval = 25 + (5 * entity->id);
 }
 
 void update_monster(struct Entity* entity) {

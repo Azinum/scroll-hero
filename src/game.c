@@ -25,9 +25,9 @@ static void game_init() {
   camera_init();
   player_init();
 
-  for (uint32_t i = 0; i < 60; i++) {
-    int x = i * TILE_SIZE;
-    int y = 400;
+  for (uint32_t i = 5; i < 10; i++) {
+    int32_t x = i * TILE_SIZE;
+    int32_t y = 400;
     entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE), ENTITY_MONSTER);
   }
 
