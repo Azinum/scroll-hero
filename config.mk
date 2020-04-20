@@ -12,6 +12,8 @@ SRC_FILES=$(SRC_DIR)/*.c
 
 SRC_FILES+=$(SRC_DIR)/entity_types/*.c
 
+SRC_FILES+=$(SRC_DIR)/tables/*.c
+
 BUILD_DIR=build
 
 RESOURCES_DIR=resources

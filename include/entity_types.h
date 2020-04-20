@@ -21,8 +21,4 @@ struct Entity_type_def {
 
 extern struct Entity_type_def entity_types[];
 
-void init_monster(struct Entity* entity);
-void update_monster(struct Entity* entity);
-void destroy_monster(struct Entity* entity);
-
 #endif
