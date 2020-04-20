@@ -11,7 +11,7 @@
 
 #include "player.h"
 
-static int16_t player_speed = 5;
+static int16_t player_speed = 4;
 static int16_t gravity = 1;
 static int16_t jump_speed = 10;
 static int16_t max_speed = 20;
