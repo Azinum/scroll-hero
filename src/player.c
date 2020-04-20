@@ -14,7 +14,7 @@ struct Entity* player;
 static void* texture;
 
 void player_init() {
-  player = entity_add(100, 150, ENTITY_PLAYER);
+  player = entity_add(100, 300, ENTITY_PLAYER);
   player->flags = FLAGS_COLLIDABLE;
   texture = texture_load_from_file("resources/sprites/boy-with-helm.png");
 }

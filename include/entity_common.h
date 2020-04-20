@@ -5,7 +5,7 @@
 
 #include "common.h"
 #include "entity.h"
-#include "entity_types.h"
+#include "tables.h"
 #include "game.h"
 #include "camera.h"
 #include "window.h"

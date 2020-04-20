@@ -1,7 +1,7 @@
-// entity_types.h
+// table.h
 
-#ifndef _ENTITY_TYPES_H
-#define _ENTITY_TYPES_H
+#ifndef _TABLES_H
+#define _TABLES_H
 
 struct Entity;
 

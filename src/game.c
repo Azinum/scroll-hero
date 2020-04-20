@@ -7,7 +7,7 @@
 #include "render.h"
 #include "window.h"
 #include "entity.h"
-#include "entity_types.h"
+#include "tables.h"
 #include "player.h"
 #include "hud.h"
 
@@ -21,7 +21,9 @@ double totaltime = 0;
 int16_t game_tick = 0;
 
 static void game_init() {
-  srand(time(NULL));
+  // srand(time(NULL));
+  int32_t seed = 55102;
+  srand(seed);
   camera_init();
   player_init();
 
@@ -33,7 +35,7 @@ static void game_init() {
 
   for (uint32_t i = 0; i < 150; i++) {
     int32_t x = rand() % 1500;
-    int32_t y = rand() % 350;
+    int32_t y = rand() % 364;
     struct Entity* e = entity_add(x - (x % TILE_SIZE), y - (y % TILE_SIZE), ENTITY_MONSTER);
     e->flags |= FLAGS_STATIC;
   }

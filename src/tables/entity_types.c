@@ -2,7 +2,7 @@
 
 #include "common.h"
 #include "entity.h"
-#include "entity_types.h"
+#include "tables.h"
 #include "entity_types_gen.h"
 
 struct Entity_type_def entity_types[] = {
