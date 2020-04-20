@@ -30,6 +30,7 @@ struct Entity {
   int16_t y_speed;
   uint8_t grounded;
   int16_t interval;
+  uint8_t flipped;
   struct Box hitbox;
 };
 

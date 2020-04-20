@@ -9,6 +9,6 @@ void render_fill_rect(int32_t x, int32_t y, int32_t w, int32_t h, int32_t r, int
 
 void render_text(int32_t x, int32_t y, float size, const char* text);
 
-void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, void* texture);
+void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, uint8_t flipped, void* texture);
 
 #endif

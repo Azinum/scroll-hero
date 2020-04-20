@@ -44,7 +44,7 @@ void render_text(int32_t x, int32_t y, float size, const char* text) {
   SDL_DestroyTexture(texture);
 }
 
-void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, void* texture) {
+void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, uint8_t flipped, void* texture) {
   // assert(texture != NULL);
   if (!temp_texture) {
     temp_texture = texture_load_from_file("resources/sprites/tile-brick.png");
@@ -52,9 +52,11 @@ void render_texture(int32_t x, int32_t y, int32_t w, int32_t h, void* texture) {
   if (!texture) {
     texture = temp_texture;
   }
+  int32_t flip = flipped ? SDL_FLIP_HORIZONTAL : 0;
   SDL_Renderer* renderer = window_renderer();
   SDL_Rect rect = (struct SDL_Rect) {x, y, w, h};
-  SDL_RenderCopy(renderer, texture, NULL, &rect);
+  SDL_RenderCopyEx(renderer, texture, NULL, &rect, 0, NULL, flip);
+  // SDL_RenderCopy(renderer, texture, NULL, &rect);
 #if 0
   render_rect(x, y, w, h, 255, 50, 50, 255);
 #endif

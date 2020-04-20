@@ -16,7 +16,7 @@ static void* texture;
 void player_init() {
   player = entity_add(100, 300, ENTITY_PLAYER);
   player->flags = FLAGS_COLLIDABLE;
-  texture = texture_load_from_file("resources/sprites/boy-with-helm.png");
+  texture = texture_load_from_file("resources/sprites/wizard.png");
 }
 
 void player_update() {
@@ -28,10 +28,14 @@ void player_update() {
   if (state[27] && player->grounded)  // 'x'
     player->y_speed = -super_jump_speed;
 
-  if (state[4])
+  if (state[4]) {
     player->x_speed = -player_speed;
-  else if (state[7])
+    player->flipped = 0;
+  }
+  else if (state[7]) {
     player->x_speed = player_speed;
+    player->flipped = 1;
+  }
   else
     player->x_speed *= 0.5f;
 
@@ -46,7 +50,7 @@ void player_update() {
 }
 
 void player_render() {
-  render_texture(player->x - camera.x, player->y - camera.y, 32, 32, texture);
+  render_texture(player->x - camera.x, player->y - camera.y, 32, 32, player->flipped, texture);
 }
 
 void player_free() {
