@@ -1,14 +1,8 @@
 // player.c
 
-#include "common.h"
+#include "entity_common.h"
 #include "render.h"
-#include "camera.h"
-#include "window.h"
 #include "texture.h"
-#include "game.h"
-#include "entity.h"
-#include "entity_types.h"
-
 #include "player.h"
 
 static int16_t player_speed = 4;
