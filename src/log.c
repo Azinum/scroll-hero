@@ -5,7 +5,7 @@
 
 #include "log.h"
 
-void log_out(const char* format, ...) {
+void log_printf(const char* format, ...) {
   va_list args;
   va_start(args, format);
 

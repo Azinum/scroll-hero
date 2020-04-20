@@ -2,9 +2,9 @@
 
 #include "common.h"
 #include "game.h"
-#include "player.h"
 #include "camera.h"
 #include "render.h"
+#include "player.h"
 #include "hud.h"
 
 #define BUFFER_LENGTH 64

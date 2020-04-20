@@ -4,7 +4,6 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "common.h"
-#include "player.h"
 #include "window.h"
 
 struct Window {
@@ -18,9 +17,9 @@ struct Window {
 static struct Window window;
 
 int window_init(const char* screen_title, int32_t screen_width, int32_t screen_height) {
-  log_out("Window init (w: %i, h: %i)\n", screen_width, screen_height);
+  log_printf("Window init (w: %i, h: %i)\n", screen_width, screen_height);
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    log_out("%s\n", SDL_GetError());
+    log_printf("%s\n", SDL_GetError());
     return -1;
   }
   window.window = SDL_CreateWindow(
@@ -32,7 +31,7 @@ int window_init(const char* screen_title, int32_t screen_width, int32_t screen_h
     0
   );
   if (!window.window) {
-    log_out("%s\n", SDL_GetError());
+    log_printf("%s\n", SDL_GetError());
     return ERR;
   }
   // SDL_RENDERER_ACCELERATED | SDL_RENDERER_SOFTWARE § SDL_RENDERER_PRESENTVSYNC
@@ -40,19 +39,19 @@ int window_init(const char* screen_title, int32_t screen_width, int32_t screen_h
     SDL_RENDERER_PRESENTVSYNC
   );
   if (!window.renderer) {
-    log_out("%s\n", SDL_GetError());
+    log_printf("%s\n", SDL_GetError());
     return ERR;
   }
   if (SDL_SetRenderDrawBlendMode(window.renderer, SDL_BLENDMODE_BLEND) != 0) {
-    log_out("%s\n", SDL_GetError());
+    log_printf("%s\n", SDL_GetError());
     return ERR;
   }
   if (TTF_Init() != 0) {
-    log_out("TTF_Init: %s\n", TTF_GetError());
+    log_printf("TTF_Init: %s\n", TTF_GetError());
     return ERR;
   }
   if (!(window.font = TTF_OpenFont("resources/fonts/font.ttf", 30))) {
-    log_out("TTF_OpenFont: %s\n", TTF_GetError());
+    log_printf("TTF_OpenFont: %s\n", TTF_GetError());
     return ERR;
   }
   window.init = 1;

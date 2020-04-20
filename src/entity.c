@@ -1,14 +1,7 @@
 // entity.c
 
-#include <string.h>
-#include <math.h>
-
-#include "common.h"
-#include "camera.h"
-#include "list.h"
+#include "entity_common.h"
 #include "render.h"
-#include "game.h"
-#include "entity_types.h"
 
 #include "entity.h"
 
@@ -22,7 +15,7 @@ static uint8_t entity_collision(struct Entity* e);
 struct Entity* entity_alloc() {
   struct Entity* entity = malloc(sizeof(struct Entity));
   if (!entity) {
-    log_out("Failed to allocate memory for entity\n");
+    log_printf("Failed to allocate memory for entity\n");
     return NULL;
   }
   memset(entity, 0, sizeof(struct Entity));
