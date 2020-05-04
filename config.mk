@@ -2,7 +2,7 @@
 
 CC=gcc
 
-PROG_NAME=game
+PROG_NAME=scrollhero
 
 INCLUDE_DIR=include
 

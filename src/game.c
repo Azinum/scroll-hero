@@ -48,7 +48,7 @@ static void game_init() {
 
 int game_execute(int argc, char** argv) {
   log_printf("%s\n", "Game has been initialized");
-  if (window_init("Generic game | 800x600", SCREEN_WIDTH, SCREEN_HEIGHT) != 0)
+  if (window_init("Scroll Hero | 800x600", SCREEN_WIDTH, SCREEN_HEIGHT) != 0)
     return -1;
 
   game_init();
